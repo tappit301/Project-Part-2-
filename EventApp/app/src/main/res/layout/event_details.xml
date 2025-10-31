@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Event Cover Image -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <ImageView
+                    android:id="@+id/ivEventCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="#CCCCCC"
+                    android:contentDescription="Event cover image" />
+
+                <!-- Back Button Overlay -->
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="Back"
+                    android:elevation="4dp" />
+
+                <!-- Share Button (Top Right) -->
+                <ImageButton
+                    android:id="@+id/btnShare"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="16dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/circle_background"
+                    android:src="@drawable/ic_share"
+                    android:contentDescription="Share event"
+                    android:elevation="4dp" />
+
+            </FrameLayout>
+
+            <!-- Event Details Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="@android:color/white">
+
+                <!-- Event Title -->
+                <TextView
+                    android:id="@+id/tvEventTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event Title"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Date and Time Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/empty_calender"
+                        android:contentDescription="Date icon"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvEventDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Friday, November 15, 2024"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/tvEventTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7:00 PM - 10:00 PM"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Location Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_location"
+                        android:contentDescription="Location icon"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvEventLocation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="123 Main Street, Edmonton, AB"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+                <!-- Organizer Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_person"
+                        android:contentDescription="Organizer icon"
+                        android:layout_marginEnd="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hosted by"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/tvOrganizerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="tappit"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Attendees Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_people"
+                        android:contentDescription="Attendees icon"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvAttendeeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 people attending"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+
+                <!-- Capacity Indicator (if limited) -->
+                <LinearLayout
+                    android:id="@+id/layoutCapacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvCapacityStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 / 50 spots filled"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="8dp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressCapacity"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:max="100"
+                        android:progress="48" />
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- About Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About this event"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tvEventDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Event description goes here. This is where you describe what the event is about, what attendees can expect, and any other relevant details."
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="20dp" />
+
+                <!-- Category Tags -->
+                <LinearLayout
+                    android:id="@+id/layoutTags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="80dp">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Technology"
+                        style="@style/Widget.MaterialComponents.Chip.Action" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Action Buttons (Fixed at bottom) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="8dp">
+
+        <!-- For Attendees: Join Waiting List Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnJoinWaitingList"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Join Waiting List"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp"
+            android:visibility="visible" />
+
+        <!-- For Organizers: Manage Access Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnManageAccess"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Manage Access"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            app:cornerRadius="8dp"
+            android:visibility="gone"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <!-- Already Joined Status (Hidden by default) -->
+        <LinearLayout
+            android:id="@+id/layoutJoinedStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="16dp"
+            android:background="@drawable/background_success"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/check_joined"
+                android:contentDescription="Joined"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You're on the waiting list!"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#4CAF50" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
