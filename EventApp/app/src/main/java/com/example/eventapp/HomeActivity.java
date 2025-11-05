@@ -37,16 +37,20 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Snackbar.make(findViewById(android.R.id.content),
-                    "Settings clicked", Snackbar.LENGTH_SHORT).show();
-            return true;
-        } else if (id == R.id.action_profile) {
+        if (id == R.id.action_profile) {
             Snackbar.make(findViewById(android.R.id.content),
                     "Profile clicked", Snackbar.LENGTH_SHORT).show();
             return true;
+        } else if (id == R.id.action_settings) {
+            Snackbar.make(findViewById(android.R.id.content),
+                    "Settings clicked", Snackbar.LENGTH_SHORT).show();
+            return true;
+        } else if (id == android.R.id.home) {
+            Snackbar.make(findViewById(android.R.id.content),
+                    "Home clicked", Snackbar.LENGTH_SHORT).show();
+            return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+}
 }
 
