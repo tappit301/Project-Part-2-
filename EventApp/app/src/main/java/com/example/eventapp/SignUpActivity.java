@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
 
             // 👉 Redirect to Landing Page after sign-up
-            Intent intent = new Intent(SignUpActivity.this, LandingPageActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, OrganizerLandingFragment.class);
             startActivity(intent);
             finish(); // close sign-up screen
         });
