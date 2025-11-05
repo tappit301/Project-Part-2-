@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:title="Home"
+        android:icon="@drawable/explore_events"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_sign_in"
+        android:title="Sign In"
+        android:icon="@drawable/profile_icon"
+        app:showAsAction="always" />
+</menu>

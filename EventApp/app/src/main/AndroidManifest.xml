@@ -10,16 +10,29 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EventApp">
+        android:theme="@style/Theme.EventApp"
+        tools:targetApi="31">
+
+        <!-- 🏠 Default launcher screen -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 🔑 Sign In / Login screen -->
+        <activity android:name=".LoginActivity" />
+
+        <!-- 🆕 Sign Up / Create Account screen -->
+        <activity android:name=".SignUpActivity" />
+
+        <!-- ✅ Optional: Include if you use SignInActivity class separately -->
+        <activity android:name=".SignInActivity" />
+
     </application>
 
 </manifest>
+
