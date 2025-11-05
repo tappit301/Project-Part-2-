@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,15 +47,18 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.action_profile) {
-            Snackbar.make(findViewById(android.R.id.content),
-                    "Profile clicked", Snackbar.LENGTH_SHORT).show();
+            // Profile clicked — you can later connect it to a real ProfileActivity
+            Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.action_sign_in) {
-            Snackbar.make(findViewById(android.R.id.content),
-                    "Sign In clicked", Snackbar.LENGTH_SHORT).show();
+            // ✅ FIX: Actually open the login/sign-in screen
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

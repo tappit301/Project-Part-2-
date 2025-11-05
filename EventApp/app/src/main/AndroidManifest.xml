@@ -13,7 +13,7 @@
         android:theme="@style/Theme.EventApp"
         tools:targetApi="31">
 
-        <!-- Default launcher screen -->
+        <!-- 🏠 Default launcher screen -->
         <activity
             android:name=".HomeActivity"
             android:exported="true">
@@ -23,8 +23,16 @@
             </intent-filter>
         </activity>
 
-        <!-- Keep login screen available -->
+        <!-- 🔑 Sign In / Login screen -->
         <activity android:name=".LoginActivity" />
+
+        <!-- 🆕 Sign Up / Create Account screen -->
+        <activity android:name=".SignUpActivity" />
+
+        <!-- ✅ Optional: Include if you use SignInActivity class separately -->
+        <activity android:name=".SignInActivity" />
+
     </application>
+
 </manifest>
 
