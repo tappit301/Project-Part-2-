@@ -13,8 +13,9 @@
         android:theme="@style/Theme.EventApp"
         tools:targetApi="31">
 
+        <!--  Make HomeActivity the default launcher -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Other activities, services, etc. go here -->
-
-    </application> <!-- This is the closing tag that might be missing -->
-
+        <!-- Keep MainActivity available for later (like login, etc.) -->
+        <activity android:name=".MainActivity" />
+    </application>
 </manifest>
