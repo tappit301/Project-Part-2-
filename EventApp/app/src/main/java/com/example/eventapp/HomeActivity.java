@@ -1,9 +1,11 @@
 package com.example.eventapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,13 +20,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
-        // Find the toolbar defined in your XML
+        // Toolbar setup
         Toolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Tappit");
         }
+
+        // Button: Go to LoginActivity when "Getting Started" is clicked
+        Button btnGettingStarted = findViewById(R.id.btnGettingStarted);
+        btnGettingStarted.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -41,16 +50,11 @@ public class HomeActivity extends AppCompatActivity {
             Snackbar.make(findViewById(android.R.id.content),
                     "Profile clicked", Snackbar.LENGTH_SHORT).show();
             return true;
-        } else if (id == R.id.action_settings) {
+        } else if (id == R.id.action_sign_in) {
             Snackbar.make(findViewById(android.R.id.content),
-                    "Settings clicked", Snackbar.LENGTH_SHORT).show();
-            return true;
-        } else if (id == android.R.id.home) {
-            Snackbar.make(findViewById(android.R.id.content),
-                    "Home clicked", Snackbar.LENGTH_SHORT).show();
+                    "Sign In clicked", Snackbar.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
 }
-}
-
