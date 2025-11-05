@@ -112,7 +112,7 @@
                 android:textSize="14sp"
                 android:layout_marginBottom="20dp" />
 
-            <!-- TWO MAIN BOXES -->
+            <!-- TWO MAIN BOXES WITH ICONS -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,6 +131,12 @@
                     android:padding="16dp"
                     android:layout_marginEnd="8dp">
 
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_lottery_24" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -139,7 +145,8 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -160,6 +167,12 @@
                     android:padding="16dp"
                     android:layout_marginStart="8dp">
 
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_waitlist_24" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,7 +181,8 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -177,6 +191,173 @@
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- FOUR FEATURE BOXES -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="40dp">
+
+                <!-- Row 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- QR Code -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_box"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_marginEnd="8dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_qr_code_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="QR Code Access"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Scan QR codes to join event lists easily."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Notifications -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_box"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_marginStart="8dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_notifications_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Smart Notifications"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Get alerts when you're selected and manage preferences."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Row 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <!-- Accessibility -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_box"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_marginEnd="8dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_accessibility_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Accessible &amp; Inclusive"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Designed for all — inclusive for everyone."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!-- Location -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_box"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_marginStart="8dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_location_on_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Location Tracking"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="8dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Optional geolocation to ensure fairness."
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
