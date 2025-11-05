@@ -62,12 +62,15 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
+            // ✅ If everything is valid
             Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            // 👉 Redirect to Landing Page after sign-up
+            Intent intent = new Intent(SignUpActivity.this, LandingPageActivity.class);
             startActivity(intent);
-            finish();
+            finish(); // close sign-up screen
         });
+
 
         signInToggleButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
