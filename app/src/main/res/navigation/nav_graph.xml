@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/organizerLandingFragment">
+
+    <!-- Organizer Landing Screen -->
+    <fragment
+        android:id="@+id/organizerLandingFragment"
+        android:name="com.example.eventapp.OrganizerLandingFragment"
+        android:label="Organizer Landing"
+        tools:layout="@layout/landing_page">
+
+        <!-- Navigate to Create Event -->
+        <action
+            android:id="@+id/action_organizerLandingFragment_to_createEventFragment"
+            app:destination="@id/createEventFragment" />
+
+        <!-- Navigate to Event Details -->
+        <action
+            android:id="@+id/action_organizerLandingFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
+    </fragment>
+
+    <!-- Create Event Screen -->
+    <fragment
+        android:id="@+id/createEventFragment"
+        android:name="com.example.eventapp.CreateEventFragment"
+        android:label="Create Event"
+        tools:layout="@layout/create_event" />
+
+    <!-- Event Details Screen -->
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.example.eventapp.EventDetailsFragment"
+        android:label="Event Details"
+        tools:layout="@layout/event_details">
+
+        <!-- Arguments passed when opening event details -->
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <argument
+            android:name="desc"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <argument
+            android:name="date"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <argument
+            android:name="time"
+            app:argType="string"
+            android:defaultValue="" />
+
+        <argument
+            android:name="location"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+</navigation>
+
