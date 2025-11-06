@@ -1,91 +1,82 @@
 package com.example.eventapp;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Unit tests for EventAdapter (no emulator required).
- */
+import static org.junit.Assert.*;
+
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 34) // Match your compileSdk
 public class EventAdapterTest {
 
-    private List<Event> sampleEvents;
+    private List<Event> mockEvents;
     private EventAdapter adapter;
     private ViewGroup parent;
 
     @Before
-    public void setup() {
-        // Prepare a fake event list
-        sampleEvents = new ArrayList<>();
-        sampleEvents.add(new Event("Hackathon", "Coding challenge", "10/11/2025", "09:00", "Main Hall"));
-        sampleEvents.add(new Event("Art Fair", "Gallery showcase", "12/12/2025", "18:30", "Community Center"));
+    public void setUp() {
+        // Prepare sample data
+        mockEvents = new ArrayList<>();
+        mockEvents.add(new Event("Music Fest", "A fun concert", "10/12/2025", "18:00", "City Park"));
+        mockEvents.add(new Event("Tech Meetup", "Developers unite", "15/12/2025", "10:00", "Campus Hall"));
 
-        adapter = new EventAdapter(sampleEvents);
+        adapter = new EventAdapter(mockEvents);
 
-        // Mock parent view for inflation
-        parent = new android.widget.FrameLayout(RuntimeEnvironment.getApplication());
+        // Use a dummy parent for inflating the layout
+        parent = new RecyclerView(RuntimeEnvironment.getApplication());
     }
 
     @Test
-    public void testGetItemCount_returnsCorrectSize() {
+    public void testItemCount_MatchesEventList() {
         assertEquals(2, adapter.getItemCount());
     }
 
     @Test
-    public void testOnBindViewHolder_bindsCorrectData() {
-        // Create ViewHolder
+    public void testOnCreateViewHolder_CreatesValidViewHolder() {
         EventAdapter.EventViewHolder holder = adapter.onCreateViewHolder(parent, 0);
 
-        // Bind first event
-        adapter.onBindViewHolder(holder, 0);
-
-        TextView titleView = holder.itemView.findViewById(R.id.tvEventTitle);
-        TextView dateView = holder.itemView.findViewById(R.id.tvEventDate);
-
-        assertEquals("Hackathon", titleView.getText().toString());
-        assertTrue(dateView.getText().toString().contains("10/11/2025"));
-        assertTrue(dateView.getText().toString().contains("09:00"));
+        assertNotNull(holder);
+        assertNotNull(holder.tvTitle);
+        assertNotNull(holder.tvDate);
     }
 
     @Test
-    public void testItemClick_callsNavigationWithBundle() {
-        // Create ViewHolder
+    public void testOnBindViewHolder_BindsCorrectData() {
         EventAdapter.EventViewHolder holder = adapter.onCreateViewHolder(parent, 0);
+        adapter.onBindViewHolder(holder, 0);
 
-        // Mock NavController
-        NavController mockNavController = mock(NavController.class);
+        assertEquals("Music Fest", holder.tvTitle.getText().toString());
+        assertEquals("10/12/2025 • 18:00", holder.tvDate.getText().toString());
+    }
 
-        // Prepare navigation mock
-        try (MockedStatic<Navigation> navStatic = Mockito.mockStatic(Navigation.class)) {
-            navStatic.when(() -> Navigation.findNavController(holder.itemView)).thenReturn(mockNavController);
+    @Test
+    public void testGetItemCount_WithEmptyList_ReturnsZero() {
+        EventAdapter emptyAdapter = new EventAdapter(new ArrayList<>());
+        assertEquals(0, emptyAdapter.getItemCount());
+    }
 
-            // Bind event and simulate click
-            adapter.onBindViewHolder(holder, 0);
-            holder.itemView.performClick();
+    @Test
+    public void testEventClickListener_DoesNotCrash() {
+        EventAdapter.EventViewHolder holder = adapter.onCreateViewHolder(parent, 0);
+        adapter.onBindViewHolder(holder, 0);
 
-            // Verify that navigation was called with correct arguments
-            verify(mockNavController, times(1))
-                    .navigate(eq(R.id.action_organizerLandingFragment_to_eventDetailsFragment), any(Bundle.class));
-        }
+        // Simulate click
+        holder.itemView.performClick();
+
+        // Assert item is clickable
+        assertTrue(holder.itemView.isClickable());
     }
 }

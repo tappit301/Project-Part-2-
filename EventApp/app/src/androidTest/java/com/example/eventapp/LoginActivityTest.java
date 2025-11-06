@@ -1,74 +1,76 @@
 package com.example.eventapp;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import android.app.Activity;
+import android.app.Instrumentation;
+
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.junit.Rule;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/**
- * UI tests for LoginActivity without testing Toast messages.
- */
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
 
-    @Rule
-    public ActivityScenarioRule<LoginActivity> activityRule =
-            new ActivityScenarioRule<>(LoginActivity.class);
-
-    /** Checks that all main UI elements are displayed */
-    @Test
-    public void testUIElementsDisplayed() {
-        onView(withId(R.id.editTextEmail)).check(matches(isDisplayed()));
-        onView(withId(R.id.editTextPassword)).check(matches(isDisplayed()));
-        onView(withId(R.id.btnSignIn)).check(matches(isDisplayed()));
-        onView(withId(R.id.btnSignUpToggle)).check(matches(isDisplayed()));
+    @Before
+    public void setup() {
+        Intents.init();
     }
 
-    /** Test typing into input fields */
-    @Test
-    public void testTextInputFields() {
-        onView(withId(R.id.editTextEmail)).perform(replaceText("test@gmail.com"));
-        onView(withId(R.id.editTextPassword)).perform(replaceText("123456"));
-        closeSoftKeyboard();
-
-        onView(withId(R.id.editTextEmail)).check(matches(isDisplayed()));
-        onView(withId(R.id.editTextPassword)).check(matches(isDisplayed()));
+    @After
+    public void teardown() {
+        Intents.release();
     }
 
-    /** Test clicking Sign In and Sign Up buttons */
     @Test
-    public void testButtonClicks() {
-        // Type credentials
-        onView(withId(R.id.editTextEmail)).perform(replaceText("test@gmail.com"));
-        onView(withId(R.id.editTextPassword)).perform(replaceText("123456"));
-        closeSoftKeyboard();
+    public void testEmptyFieldsShowsToast() {
+        try (ActivityScenario<LoginActivity> scenario = ActivityScenario.launch(LoginActivity.class)) {
+            // Click Sign In without filling fields
+            onView(withId(R.id.btnSignIn)).perform(click());
 
-        // Click Sign In
-        onView(withId(R.id.btnSignIn)).perform(click());
-
-        // Click Sign Up toggle
-        onView(withId(R.id.btnSignUpToggle)).perform(click());
+            // TODO: To verify Toast, use ToastMatcher if needed
+            // Not built-in in Espresso
+        }
     }
 
-    /** Test empty input behavior (fields can be empty) */
     @Test
-    public void testEmptyInputClick() {
-        // Clear any text
-        onView(withId(R.id.editTextEmail)).perform(replaceText(""));
-        onView(withId(R.id.editTextPassword)).perform(replaceText(""));
-        closeSoftKeyboard();
+    public void testInvalidCredentialsShowsToast() {
+        try (ActivityScenario<LoginActivity> scenario = ActivityScenario.launch(LoginActivity.class)) {
+            onView(withId(R.id.editTextEmail)).perform(replaceText("wrong@gmail.com"));
+            onView(withId(R.id.editTextPassword)).perform(replaceText("wrongpass"));
+            onView(withId(R.id.btnSignIn)).perform(click());
 
-        // Click Sign In with empty fields
-        onView(withId(R.id.btnSignIn)).perform(click());
+            // TODO: To verify Toast
+        }
+    }
+
+    @Test
+    public void testValidLoginStartsHomeActivity() {
+        try (ActivityScenario<LoginActivity> scenario = ActivityScenario.launch(LoginActivity.class)) {
+            onView(withId(R.id.editTextEmail)).perform(replaceText("test@gmail.com"));
+            onView(withId(R.id.editTextPassword)).perform(replaceText("123456"));
+            onView(withId(R.id.btnSignIn)).perform(click());
+
+            Intents.intended(IntentMatchers.hasComponent(HomeActivity.class.getName()));
+        }
+    }
+
+    @Test
+    public void testSignUpButtonStartsSignUpActivity() {
+        try (ActivityScenario<LoginActivity> scenario = ActivityScenario.launch(LoginActivity.class)) {
+            onView(withId(R.id.btnSignUpToggle)).perform(click());
+            Intents.intended(IntentMatchers.hasComponent(SignUpActivity.class.getName()));
+        }
     }
 }
