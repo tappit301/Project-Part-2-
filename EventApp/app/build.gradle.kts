@@ -43,6 +43,8 @@ dependencies {
     implementation("androidx.fragment:fragment:1.6.2")
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.androidx.fragment)
+    implementation(libs.google.material)
 
 
     // Testing

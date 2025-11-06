@@ -26,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.btnSignUp);
         signInToggleButton = findViewById(R.id.btnSignInToggle);
 
+        // ✅ Sign-Up logic
         signUpButton.setOnClickListener(v -> {
             String fullName = fullNameInput.getText().toString().trim();
             String email = emailInput.getText().toString().trim();
@@ -62,18 +63,19 @@ public class SignUpActivity extends AppCompatActivity {
                 return;
             }
 
-            // ✅ If everything is valid
+            // ✅ Account created successfully
             Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
 
-            // 👉 Redirect to Landing Page after sign-up
-            Intent intent = new Intent(SignUpActivity.this, OrganizerLandingFragment.class);
+            // 👉 Redirect to Landing page (OrganizerLandingFragment inside LandingHostActivity)
+            Intent intent = new Intent(SignUpActivity.this, LandingHostActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-            finish(); // close sign-up screen
+
         });
 
-
+        // ✅ Switch back to Sign-In screen
         signInToggleButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
             startActivity(intent);
             finish();
         });

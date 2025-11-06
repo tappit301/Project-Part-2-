@@ -32,6 +32,9 @@
         <!-- ✅ Optional: Include if you use SignInActivity class separately -->
         <activity android:name=".SignInActivity" />
 
+        <activity android:name=".LandingHostActivity" />
+
+
     </application>
 
 </manifest>

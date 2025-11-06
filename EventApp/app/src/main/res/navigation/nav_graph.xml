@@ -22,7 +22,6 @@
             android:id="@+id/action_organizerLandingFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
     </fragment>
-
     <!-- Create Event Screen -->
     <fragment
         android:id="@+id/createEventFragment"

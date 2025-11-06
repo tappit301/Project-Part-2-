@@ -17,7 +17,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // ✅ uses your existing sign-in XML
+        setContentView(R.layout.activity_login);
 
         // Connect UI elements
         emailInput = findViewById(R.id.editTextEmail);
@@ -40,16 +40,17 @@ public class SignInActivity extends AppCompatActivity {
                 return;
             }
 
-            // Later you can replace this with Firebase login or your own logic
+            // Later: replace this with Firebase or backend login
             Toast.makeText(this, "Signed in successfully!", Toast.LENGTH_SHORT).show();
 
-            // ✅ Go to home or landing page (for now just show success)
-            Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+            // ✅ Redirect to LandingHostActivity (OrganizerLandingFragment)
+            Intent intent = new Intent(SignInActivity.this, LandingHostActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-            finish();
+
         });
 
-        // ✅ Sign-Up Toggle Button click
+        // ✅ Switch to Sign-Up screen
         signUpToggleButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
             startActivity(intent);
@@ -57,4 +58,3 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 }
-

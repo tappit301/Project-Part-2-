@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.snackbar.Snackbar;
-
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -29,11 +27,24 @@ public class HomeActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Tappit");
         }
 
-        // Button: Go to LoginActivity when "Getting Started" is clicked
+        // "Getting Started" → SignInActivity
         Button btnGettingStarted = findViewById(R.id.btnGettingStarted);
         btnGettingStarted.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
             startActivity(intent);
+        });
+
+        // "Create Account" → SignUpActivity
+        Button btnCreateAccount = findViewById(R.id.btnCreateAccount);
+        btnCreateAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        });
+
+        // Optional: "View Events" (guest mode)
+        Button btnViewEvents = findViewById(R.id.button_view_events);
+        btnViewEvents.setOnClickListener(v -> {
+            Toast.makeText(this, "Guest view coming soon!", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -49,12 +60,10 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_profile) {
-            // Profile clicked — you can later connect it to a real ProfileActivity
             Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.action_sign_in) {
-            // ✅ FIX: Actually open the login/sign-in screen
-            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
             startActivity(intent);
             return true;
         }
