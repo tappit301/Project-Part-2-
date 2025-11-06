@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#F5F5F5"
+    tools:context=".OrganizerLandingFragment">
 
     <!-- APP BAR -->
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@id/appBarLayout"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F5F5F5"
-        app:elevation="4dp"
-        tools:ignore="MissingConstraints">
+        app:elevation="4dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -22,26 +22,24 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <!--Left side - logo/title, explore events-->
             <TextView
                 android:id="@+id/AppName"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="tappit"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black" />
 
             <ImageButton
-            android:id="@+id/btnExplore"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/explore_events"
-            android:contentDescription="Explore events" />
+                android:id="@+id/btnExplore"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/explore_events"
+                android:contentDescription="Explore events" />
 
-            <!--Right side actions-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -49,44 +47,36 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-            <!--Right side- Create event button, Notification icon, Profile Icon-->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCreateEventTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create Event"
+                    android:textSize="13sp"
+                    style="@style/Widget.Material3.Button.TonalButton" />
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create Event"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textSize="13sp"
-                style="@style/Widget.Material3.Button.TonalButton"/>
+                <ImageButton
+                    android:id="@+id/btnNotifications"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/notification_icon"
+                    android:contentDescription="Notifications" />
 
-
-
-            <!--Notification Button-->
-            <ImageButton
-                android:id="@+id/btnNotifications"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/notification_icon"
-                android:contentDescription="Notifications" />
-
-            <!-- Profile Icon -->
-            <ImageView
-                android:id="@+id/btnProfile"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/profile_icon"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Profile" />
-
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/btnProfile"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/profile_icon"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Profile" />
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--Main Content-->
+    <!-- SCROLLABLE CONTENT -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -98,26 +88,23 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-        <!--Events Header-->
+            <!-- HEADER -->
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="75dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="75dp">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Events"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Events"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-
-            <!--Upcoming/Past event toggle-->
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/toggleEventType"
                     android:layout_width="wrap_content"
@@ -132,9 +119,6 @@
                         android:layout_height="wrap_content"
                         android:text="Upcoming"
                         android:textSize="12sp"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:minHeight="32dp"
                         style="@style/Widget.Material3.Button.OutlinedButton" />
 
                     <com.google.android.material.button.MaterialButton
@@ -143,22 +127,17 @@
                         android:layout_height="wrap_content"
                         android:text="Past"
                         android:textSize="12sp"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:minHeight="32dp"
                         style="@style/Widget.Material3.Button.OutlinedButton" />
-
                 </com.google.android.material.button.MaterialButtonToggleGroup>
-
             </LinearLayout>
 
-            <!-- Events List / Empty State Container -->
+            <!-- CONTENT AREA -->
             <FrameLayout
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="35dp">
 
-                <!--Empty State-->
+                <!-- Empty State -->
                 <LinearLayout
                     android:id="@+id/emptyStateLayout"
                     android:layout_width="match_parent"
@@ -166,7 +145,7 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:padding="48dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="120dp"
@@ -200,18 +179,29 @@
                         android:text="+ Add Event"
                         android:textAllCaps="false"
                         style="@style/Widget.Material3.Button.OutlinedButton" />
-
                 </LinearLayout>
 
-                <!-- Events RecyclerView -->
+                <!-- Event List -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvEvents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone" />
-
-             </FrameLayout>
+            </FrameLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- FLOATING ACTION BUTTON (always visible) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:contentDescription="Add Event"
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/ic_add"
+        app:backgroundTint="@color/purple_500"
+        app:tint="@android:color/white"
+        app:layout_anchor="@id/appBarLayout" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

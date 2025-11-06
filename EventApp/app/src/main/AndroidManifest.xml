@@ -13,8 +13,9 @@
         android:theme="@style/Theme.EventApp"
         tools:targetApi="31">
 
+        <!-- 🏠 Default launcher screen -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,19 @@
             </intent-filter>
         </activity>
 
-        <!-- Other activities, services, etc. go here -->
+        <!-- 🔑 Sign In / Login screen -->
+        <activity android:name=".LoginActivity" />
 
-    </application> <!-- This is the closing tag that might be missing -->
+        <!-- 🆕 Sign Up / Create Account screen -->
+        <activity android:name=".SignUpActivity" />
+
+        <!-- ✅ Optional: Include if you use SignInActivity class separately -->
+        <activity android:name=".SignInActivity" />
+
+        <activity android:name=".LandingHostActivity" />
+
+
+    </application>
 
 </manifest>
+
