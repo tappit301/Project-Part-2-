@@ -24,26 +24,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
 
         auth = FirebaseHelper.getAuth();
-
-        // ✅ Check if a user session already exists (Firebase restores it automatically)
-        FirebaseUser currentUser = auth.getCurrentUser();
-        if (currentUser != null) {
-            Log.d(TAG, "User already signed in: " + currentUser.getEmail());
-            startActivity(new Intent(this, LandingHostActivity.class));
-            finish();
-            return;
-        }
-
-        // Otherwise show login screen
-        setContentView(R.layout.activity_login);
 
         emailInput = findViewById(R.id.editTextEmail);
         passwordInput = findViewById(R.id.editTextPassword);
         loginButton = findViewById(R.id.btnSignIn);
         signUpToggleButton = findViewById(R.id.btnSignUpToggle);
 
+        //Only handles manual login — no auto redirects here.
         loginButton.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
@@ -76,8 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
-                    } else {
-                        Toast.makeText(this, "Unexpected error. Try again.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {

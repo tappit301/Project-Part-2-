@@ -14,9 +14,9 @@
         android:theme="@style/Theme.EventApp"
         tools:targetApi="31">
 
-        <!--Default launcher screen -->
+        <!-- 🚀 Launcher Activity: Decides whether to show Login or Landing -->
         <activity
-            android:name=".HomeActivity"
+            android:name=".LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,19 +24,15 @@
             </intent-filter>
         </activity>
 
-        <!--Sign In / Login screen -->
+        <!-- Login and Signup -->
         <activity android:name=".LoginActivity" />
-
-        <!--Sign Up / Create Account screen -->
         <activity android:name=".SignUpActivity" />
 
-        <!--Include if you use SignInActivity class separately -->
-        <activity android:name=".SignInActivity" />
-
+        <!-- Main logged-in host -->
         <activity android:name=".LandingHostActivity" />
 
-
     </application>
+
 
 </manifest>
 
