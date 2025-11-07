@@ -14,7 +14,7 @@
         android:theme="@style/Theme.EventApp"
         tools:targetApi="31">
 
-        <!-- 🚀 Launcher Activity: Decides whether to show Login or Landing -->
+        <!--Launcher Activity: Decides whether to show Login or Landing -->
         <activity
             android:name=".LauncherActivity"
             android:exported="true">

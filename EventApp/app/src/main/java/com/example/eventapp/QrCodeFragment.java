@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
  */
 public class QrCodeFragment extends Fragment {
 
+
     /**
      * Inflates the layout that contains the QR code image and description text.
      *
@@ -43,6 +45,7 @@ public class QrCodeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_qr_code, container, false);
     }
 
+
     /**
      * Helps in Retrieving the event data from the bundle and generates
      * a QR code to display on the screen.
@@ -56,6 +59,12 @@ public class QrCodeFragment extends Fragment {
 
         ImageView qrImage = view.findViewById(R.id.qrImage);
         TextView qrText = view.findViewById(R.id.qrText);
+        ImageButton btnBack = view.findViewById(R.id.btnBack);
+
+
+        btnBack.setOnClickListener(v ->
+                requireActivity().getOnBackPressedDispatcher().onBackPressed()
+        );
 
         String qrData = "";
         if (getArguments() != null) {
