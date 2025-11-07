@@ -19,7 +19,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Event title -->
+
         <TextView
             android:id="@+id/tvEventTitle"
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             android:maxLines="1"
             android:ellipsize="end" />
 
-        <!-- Event date/time -->
+
         <TextView
             android:id="@+id/tvEventDate"
             android:layout_width="wrap_content"

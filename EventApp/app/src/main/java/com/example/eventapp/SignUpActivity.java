@@ -16,13 +16,42 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+/**
+ * It is the Activity that handles user registration using Firebase Authentication.
+ * Creates a new Firebase account, updates the user profile,
+ * and saves the user's information in Firestore.
+ *
+ * Author: tappit
+ */
 public class SignUpActivity extends AppCompatActivity {
 
+    /** Tag used for logging messages. */
     private static final String TAG = "SignUpActivity";
 
-    private EditText fullNameInput, emailInput, passwordInput, confirmPasswordInput;
-    private Button signUpButton, signInToggleButton;
+    /** Input field for the user's full name. */
+    private EditText fullNameInput;
 
+    /** Input field for the user's email address. */
+    private EditText emailInput;
+
+    /** Input field for the user's password. */
+    private EditText passwordInput;
+
+    /** Input field for confirming the password. */
+    private EditText confirmPasswordInput;
+
+    /** Button that triggers the sign-up process. */
+    private Button signUpButton;
+
+    /** Button that switches back to the sign-in screen. */
+    private Button signInToggleButton;
+
+    /**
+     * Called when the activity is created.
+     * Connects UI elements and handles button actions for user registration.
+     *
+     * @param savedInstanceState saved state of the activity, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +64,6 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.btnSignUp);
         signInToggleButton = findViewById(R.id.btnSignInToggle);
 
-        //When "Sign Up" is clicked
         signUpButton.setOnClickListener(v -> {
             String fullName = fullNameInput.getText().toString().trim();
             String email = emailInput.getText().toString().trim();
@@ -62,13 +90,21 @@ public class SignUpActivity extends AppCompatActivity {
             signUpUser(fullName, email, password);
         });
 
-        //Switch to Sign-In screen
         signInToggleButton.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
     }
 
+    /**
+     * This helps in creatingg a new user account using Firebase Authentication.
+     * Once successful, updates the user profile with their name
+     * and calls Firestore to store user details.
+     *
+     * @param fullName the user's full name
+     * @param email the user's email address
+     * @param password the user's chosen password
+     */
     private void signUpUser(String fullName, String email, String password) {
         FirebaseHelper.getAuth()
                 .createUserWithEmailAndPassword(email, password)
@@ -112,6 +148,14 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Help in Creating a new user document in Firestore with the user's information.
+     * After saving successfully, redirects the user to the landing page.
+     *
+     * @param userId the Firebase user ID
+     * @param fullName the user's full name
+     * @param email the user's email address
+     */
     private void createUserInFirestore(String userId, String fullName, String email) {
         UserFirebase user = new UserFirebase(userId, email, fullName, Timestamp.now());
 
@@ -123,7 +167,6 @@ public class SignUpActivity extends AppCompatActivity {
                     Log.d(TAG, "User document created successfully in Firestore for: " + email);
                     Toast.makeText(this, "Account created successfully!", Toast.LENGTH_SHORT).show();
 
-                    //Redirect to landing page now that Firestore update succeeded
                     Intent intent = new Intent(SignUpActivity.this, LandingHostActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

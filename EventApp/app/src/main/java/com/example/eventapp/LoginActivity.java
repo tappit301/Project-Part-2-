@@ -14,13 +14,39 @@ import com.example.eventapp.utils.FirebaseHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * This is the Activity that lets users log in with their email and password.
+ * Verifies credential using Firebase Authentication and redirects
+ * to the landing screen if login is successful.
+ *
+ * Author: tappit
+ */
 public class LoginActivity extends AppCompatActivity {
 
+    /** Tag used for logging. */
     private static final String TAG = "LoginActivity";
-    private EditText emailInput, passwordInput;
-    private Button loginButton, signUpToggleButton;
+
+    /** Email input field. */
+    private EditText emailInput;
+
+    /** Password input field. */
+    private EditText passwordInput;
+
+    /** Button to trigger the login process. */
+    private Button loginButton;
+
+    /** Button to switch to the sign-up screen. */
+    private Button signUpToggleButton;
+
+    /** Firebase authentication instance. */
     private FirebaseAuth auth;
 
+    /**
+     * Called when the activity is created.
+     * Sets up the login form and button listeners.
+     *
+     * @param savedInstanceState saved state of the activity, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.btnSignIn);
         signUpToggleButton = findViewById(R.id.btnSignUpToggle);
 
-        //Only handles manual login — no auto redirects here.
         loginButton.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
@@ -52,6 +77,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Signs in a user with the provided email and password.
+     * If successful, redirects to {@link LandingHostActivity}.
+     *
+     * @param email the user's email address
+     * @param password the user's password
+     */
     private void signInUser(String email, String password) {
         Log.d(TAG, "Attempting login for " + email);
 

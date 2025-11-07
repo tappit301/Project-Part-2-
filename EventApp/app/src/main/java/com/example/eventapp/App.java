@@ -9,8 +9,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
+/**
+ * Custom Application class that initializes Firebase services
+ * and manages app-level setup such as offline persistence and
+ * session handling during cold starts.
+ *
+ * Author: tappit
+ */
 public class App extends Application {
 
+    /**
+     * Called when the application is first created.
+     * Initializes Firebase, enables Firestore offline persistence,
+     * and checks if the app was launched after a full termination.
+     * If it is a cold start, the FirebaseAuth session is cleared.
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -18,7 +31,6 @@ public class App extends Application {
         FirebaseApp.initializeApp(this);
         Log.d("FirebaseInit", "Firebase initialized");
 
-        // Enable Firestore offline persistence
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         firestore.setFirestoreSettings(
                 new FirebaseFirestoreSettings.Builder()
@@ -26,7 +38,6 @@ public class App extends Application {
                         .build()
         );
 
-        //Detect if the app was started after a full termination (true cold start)
         SharedPreferences prefs = getSharedPreferences("app_state", MODE_PRIVATE);
         boolean wasRunning = prefs.getBoolean("was_running", false);
 
@@ -39,15 +50,18 @@ public class App extends Application {
             }
         }
 
-        // Mark app as running
         prefs.edit().putBoolean("was_running", true).apply();
     }
 
+    /**
+     * Called when the app process is terminated (mainly on emulators or debug mode).
+     * Marks the app as not running so that a new Firebase session is required
+     * on the next launch.
+     */
     @Override
     public void onTerminate() {
         super.onTerminate();
 
-        // This runs only on emulator or when process is killed in dev (not always on real Android)
         SharedPreferences prefs = getSharedPreferences("app_state", MODE_PRIVATE);
         prefs.edit().putBoolean("was_running", false).apply();
         Log.d("FirebaseInit", "App terminated — will require login next launch");

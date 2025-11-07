@@ -16,25 +16,39 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * This is the  first screen of the app that lets users choose between
+ * signing in, creating an account, or viewing events as a guest.
+ *
+ * If a user is already signed in, they are automatically redirected
+ * to the landing page without seeing this screen.
+ *
+ * Author: tappit
+ */
 public class HomeActivity extends AppCompatActivity {
 
+    /** Firebase authentication instance used to check user login state. */
     private FirebaseAuth mAuth;
 
+    /**
+     * Called when the activity is first created.
+     * Checks if a user is already signed in and redirects if needed,
+     * otherwise sets up the home screen buttons and toolbar.
+     *
+     * @param savedInstanceState saved state of the activity, if any
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
-        //Initialize FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
-        // 🔍 Check if Firebase restored the current user
         FirebaseUser currentUser = mAuth.getCurrentUser();
         Log.d("AuthCheck", currentUser != null
                 ? "Signed in as: " + currentUser.getEmail()
                 : "No user signed in");
 
-        //If user is already logged in, skip the Home page
         if (currentUser != null) {
             Log.d("AuthCheck", "User already signed in, redirecting to LandingHostActivity...");
             Intent intent = new Intent(HomeActivity.this, LandingHostActivity.class);
@@ -43,12 +57,14 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
-        //Only runs if not logged in
         setupHomeUI();
     }
 
+    /**
+     * Sets up the toolbar and the main buttons for the home screen:
+     * "Getting Started", "Create Account", and "View Events".
+     */
     private void setupHomeUI() {
-        // Toolbar setup
         Toolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
 
@@ -56,27 +72,29 @@ public class HomeActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Tappit");
         }
 
-        // "Getting Started" → SignInActivity
         Button btnGettingStarted = findViewById(R.id.btnGettingStarted);
         btnGettingStarted.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
             startActivity(intent);
         });
 
-        // "Create Account" → SignUpActivity
         Button btnCreateAccount = findViewById(R.id.btnCreateAccount);
         btnCreateAccount.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, SignUpActivity.class);
             startActivity(intent);
         });
 
-        // Optional: "View Events" (guest mode)
         Button btnViewEvents = findViewById(R.id.button_view_events);
-        btnViewEvents.setOnClickListener(v -> {
-            Toast.makeText(this, "Guest view coming soon!", Toast.LENGTH_SHORT).show();
-        });
+        btnViewEvents.setOnClickListener(v ->
+                Toast.makeText(this, "Guest view coming soon!", Toast.LENGTH_SHORT).show());
     }
 
+    /**
+     * Inflates the top-right menu with options like profile and sign-in.
+     *
+     * @param menu the Menu object to inflate items into
+     * @return true once the menu is created
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -84,6 +102,12 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handles actions when menu items are clicked.
+     *
+     * @param item the selected menu item
+     * @return true if the item click was handled
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
