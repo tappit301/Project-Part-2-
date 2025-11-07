@@ -59,8 +59,8 @@ Documents each class’s role, attributes, and relationships.
 ## Project Part 3 - Half Way Checkpoint:
 This section summarizes the required deliverables for **Project Part 3** and our progress towards the final app.
 ---
-
+- [Product Backlog](https://github.com/tappit301/TAPPIT301F25/wiki/Product-Backlog:-project-3)
+- [UI Mockups](https://github.com/tappit301/TAPPIT301F25/wiki/UI-Mockups:-Project-3)
 - [Storyboards](https://github.com/tappit301/TAPPIT301F25/wiki/Storyboard:-Project-3)
-- [UI Mockups]()
-- [UML Diagram](https://github.com/tappit301/TAPPIT301F25/wiki/UML-Diagrams)
-- [Product Backlog]()
+- [UML Diagrams](https://github.com/tappit301/TAPPIT301F25/wiki/UML-Class-Diagrams)
+- [CRC Cards](https://github.com/tappit301/TAPPIT301F25/wiki/CRC-CARDS:-Project-3)
