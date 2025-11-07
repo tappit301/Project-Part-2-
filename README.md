@@ -59,3 +59,8 @@ Documents each class’s role, attributes, and relationships.
 ## Project Part 3 - Half Way Checkpoint:
 This section summarizes the required deliverables for **Project Part 3** and our progress towards the final app.
 ---
+
+- [Storyboards]()
+- [UI Mockups]()
+- [UML Diagram]()
+- [Product Backlog]()
