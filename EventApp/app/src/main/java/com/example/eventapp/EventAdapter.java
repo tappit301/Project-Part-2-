@@ -35,9 +35,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvTitle.setText(event.getTitle());
         holder.tvDate.setText(event.getDate() + " • " + event.getTime());
 
-        // Click listener → open Event Details screen
+        //Click listener → open Event Details screen with eventId
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
+            bundle.putString("eventId", event.getId());         // Firestore document ID
             bundle.putString("title", event.getTitle());
             bundle.putString("desc", event.getDescription());
             bundle.putString("date", event.getDate());
@@ -45,6 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             bundle.putString("location", event.getLocation());
 
             try {
+                //Navigate to EventDetailsFragment
                 Navigation.findNavController(v).navigate(
                         R.id.action_organizerLandingFragment_to_eventDetailsFragment,
                         bundle
@@ -70,4 +72,3 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
     }
 }
-

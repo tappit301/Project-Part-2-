@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 🧭 Top App Bar -->
+    <!--Top App Bar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         app:menu="@menu/main_menu"
         app:layout_scrollFlags="scroll|enterAlways" />
 
-    <!-- 🧩 Fragment Container for navigation -->
+    <!--Fragment Container for navigation -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
