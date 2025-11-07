@@ -1,214 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/light_blue">
 
-    <!-- Top App Bar -->
+    <!-- Tappit Top Banner -->
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
-        app:elevation="4dp">
+        android:elevation="6dp"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarBrowse"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Browse Events"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:textColor="#333333"/>
-        </androidx.appcompat.widget.Toolbar>
+            android:backgroundTint="@color/white"
+            app:logo="@drawable/ic_tappit_logo"
+            app:title="Tappit"
+            app:titleTextColor="@color/black"
+            app:titleCentered="false"
+            app:menu="@menu/main_menu"
+            android:elevation="4dp" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Content -->
+    <!-- Main Scrollable Content -->
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        android:layout_marginTop="80dp"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Hero / Search Section -->
-            <LinearLayout
+            <!-- Title -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="#EAEAEA">
+                android:text="Discover Events"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:layout_marginBottom="4dp" />
 
-                <TextView
-                    android:id="@+id/textHeroTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Find your next activity"
-                    android:textColor="#333333"
-                    android:textStyle="bold"
-                    android:textSize="22sp"/>
-
-                <TextView
-                    android:id="@+id/textHeroSub"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Search, filter by category, and explore community events."
-                    android:textColor="#666666"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"/>
-
-                <!-- Search bar -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilSearch"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:hint="Search events">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:imeOptions="actionSearch"
-                        android:maxLines="1"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Categories (chips) -->
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:overScrollMode="never"
-                    android:scrollbars="none"
-                    android:layout_marginTop="10dp">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroupCategories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:singleSelection="true"
-                        app:singleLine="true"
-                        android:paddingEnd="8dp">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chipAll"
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:text="All"/>
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:text="Sports"/>
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:text="Arts"/>
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:text="Kids"/>
-
-                        <com.google.android.material.chip.Chip
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:text="Classes"/>
-                    </com.google.android.material.chip.ChipGroup>
-                </HorizontalScrollView>
-
-                <!-- Filter row (Sort) -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="end|center_vertical"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sort by:"
-                        android:textColor="#666666"
-                        android:textSize="13sp"
-                        android:layout_marginEnd="8dp"/>
-
-                    <Spinner
-                        android:id="@+id/spinnerSort"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/sort_options"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Results container -->
-            <FrameLayout
+            <!-- Subtitle -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="24dp">
+                android:text="Find and join exciting community events."
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
 
-                <!-- Empty state -->
-                <LinearLayout
-                    android:id="@+id/emptyStateBrowse"
+            <!-- Search Field -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search Events">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearchEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="48dp"
-                    android:visibility="gone">
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:alpha="0.25"
-                        android:src="@drawable/empty_calender"
-                        android:contentDescription="No events"/>
+            <!-- Optional Location Filter -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"
+                android:layout_marginTop="12dp">
 
-                    <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:drawableStart="@drawable/ic_location_on_24"
+                    android:drawablePadding="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Browse by Category -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Browse by Category"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Category Chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:singleLine="true">
+
+                    <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No matching events"
-                        android:textStyle="bold"
-                        android:textColor="#666666"
-                        android:textSize="18sp"
-                        android:layout_marginTop="12dp"/>
-                </LinearLayout>
+                        android:text="All" />
 
-                <!-- Events list -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerBrowseEvents"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:clipToPadding="false"
-                    android:paddingTop="4dp"/>
-            </FrameLayout>
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sports" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arts" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Technology" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fitness" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food" />
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <!-- Event Grid -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerBrowseEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:paddingBottom="80dp"
+                tools:listitem="@layout/item_event_card" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Floating action (optional quick filter / back to top) -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabToTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/scroll"
-        app:layout_anchorGravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_arrow_upward"
-        android:contentDescription="Back to top"
-        app:tint="#FFFFFF"
-        app:backgroundTint="#708090"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
