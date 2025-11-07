@@ -16,7 +16,7 @@
 
         <!--Launcher Activity: Decides whether to show Login or Landing -->
         <activity
-            android:name=".LauncherActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,26 +17,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
- * This is the  first screen of the app that lets users choose between
+ * The first screen of the app that lets users choose between
  * signing in, creating an account, or viewing events as a guest.
  *
  * If a user is already signed in, they are automatically redirected
  * to the landing page without seeing this screen.
- *
- * Author: tappit
  */
 public class HomeActivity extends AppCompatActivity {
 
-    /** Firebase authentication instance used to check user login state. */
     private FirebaseAuth mAuth;
 
-    /**
-     * Called when the activity is first created.
-     * Checks if a user is already signed in and redirects if needed,
-     * otherwise sets up the home screen buttons and toolbar.
-     *
-     * @param savedInstanceState saved state of the activity, if any
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
                 ? "Signed in as: " + currentUser.getEmail()
                 : "No user signed in");
 
+        // Redirect if already logged in
         if (currentUser != null) {
             Log.d("AuthCheck", "User already signed in, redirecting to LandingHostActivity...");
             Intent intent = new Intent(HomeActivity.this, LandingHostActivity.class);
@@ -61,8 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Sets up the toolbar and the main buttons for the home screen:
-     * "Getting Started", "Create Account", and "View Events".
+     * Sets up toolbar and main buttons.
      */
     private void setupHomeUI() {
         Toolbar toolbar = findViewById(R.id.topAppBar);
@@ -74,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnGettingStarted = findViewById(R.id.btnGettingStarted);
         btnGettingStarted.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
@@ -90,10 +80,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Inflates the top-right menu with options like profile and sign-in.
-     *
-     * @param menu the Menu object to inflate items into
-     * @return true once the menu is created
+     * Inflates the top-right menu (profile, sign-in, etc.)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,10 +90,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Handles actions when menu items are clicked.
-     *
-     * @param item the selected menu item
-     * @return true if the item click was handled
+     * Handles top-right menu actions.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -116,7 +100,7 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.action_sign_in) {
-            startActivity(new Intent(HomeActivity.this, SignInActivity.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             return true;
         }
 

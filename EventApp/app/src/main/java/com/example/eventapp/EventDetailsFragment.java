@@ -22,46 +22,40 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * This is THE Fragment that displays the details of a selected event and
- * provides options to join the waiting list or view the event’s QR code.
+ * Displays detailed information about a selected event.
+ * Allows users to join the waiting list and view a generated QR code.
  *
- * This screen retrieves event information passed through a bundle,
- * populates the UI, and lets users interact with Firestore by joining
- * a waiting list for the event.</p>
- *
- * @author tappit
+ * Retrieves event data passed through a Bundle, checks if the user
+ * has already joined, and updates Firestore accordingly.
  */
 public class EventDetailsFragment extends Fragment {
 
-    /** Tag for logging. */
+    /** Log tag for this class. */
     private static final String TAG = "EventDetailsFragment";
 
-    /** Button for joining the waiting list. */
+    /** Button that allows the user to join the waiting list. */
     private MaterialButton joinBtn;
 
-    /** Button for viewing the event’s QR code. */
+    /** Button that navigates to the event QR code view. */
     private MaterialButton btnViewQr;
 
-    /** The Firestore document ID of the selected event. */
+    /** The Firestore document ID for the current event. */
     private String eventId;
 
-    /** Firestore database instance. */
+    /** Firestore database reference. */
     private FirebaseFirestore firestore;
 
-    /** The currently logged-in Firebase user. */
+    /** Currently authenticated Firebase user. */
     private FirebaseUser currentUser;
 
     /**
-     * Inflates the event details layout.
+     * Inflates the event details layout for this fragment.
      *
-     * @param inflater  LayoutInflater used to inflate the view
-     * @param container Parent container that holds the fragment
-     * @param savedInstanceState Previously saved state, if any
-     * @return The inflated view for this fragment
+     * @param inflater LayoutInflater used to inflate the view
+     * @param container Parent view group
+     * @param savedInstanceState Saved state if available
+     * @return The inflated event details layout
      */
     @Nullable
     @Override
@@ -72,11 +66,11 @@ public class EventDetailsFragment extends Fragment {
     }
 
     /**
-     * Sets up the event information and initializes button actions
-     * for joining the waiting list and viewing the QR code.
+     * Initializes the fragment, populates UI with event data,
+     * and sets up listeners for joining the waiting list and viewing QR codes.
      *
-     * @param view The fragment view
-     * @param savedInstanceState Saved instance state, if available
+     * @param view The root view for this fragment
+     * @param savedInstanceState Saved instance state, if any
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -89,28 +83,38 @@ public class EventDetailsFragment extends Fragment {
         btnViewQr = view.findViewById(R.id.btnViewQr);
 
         Bundle args = getArguments();
-        String title = args != null ? args.getString("title", "") : "";
-        String date = args != null ? args.getString("date", "") : "";
-        String time = args != null ? args.getString("time", "") : "";
-        String location = args != null ? args.getString("location", "") : "";
-        String desc = args != null ? args.getString("desc", "") : "";
+        if (args != null) {
+            eventId = args.getString("eventId");
 
-        ((TextView) view.findViewById(R.id.tvEventTitle)).setText(title);
-        ((TextView) view.findViewById(R.id.tvEventDate)).setText(date);
-        ((TextView) view.findViewById(R.id.tvEventTime)).setText(time);
-        ((TextView) view.findViewById(R.id.tvEventLocation)).setText(location);
-        ((TextView) view.findViewById(R.id.tvEventDescription)).setText(desc);
+            ((TextView) view.findViewById(R.id.tvEventTitle))
+                    .setText(args.getString("title", ""));
+            ((TextView) view.findViewById(R.id.tvEventDate))
+                    .setText(args.getString("date", ""));
+            ((TextView) view.findViewById(R.id.tvEventTime))
+                    .setText(args.getString("time", ""));
+            ((TextView) view.findViewById(R.id.tvEventLocation))
+                    .setText(args.getString("location", ""));
+            ((TextView) view.findViewById(R.id.tvEventDescription))
+                    .setText(args.getString("desc", ""));
+        }
 
         ImageView btnBack = view.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> NavHostFragment.findNavController(this).popBackStack());
+        btnBack.setOnClickListener(v ->
+                NavHostFragment.findNavController(this).popBackStack());
 
-        joinBtn.setOnClickListener(v -> addUserToWaitingList(v));
+        checkIfAlreadyJoined();
+
+        joinBtn.setOnClickListener(this::addUserToWaitingList);
 
         btnViewQr.setOnClickListener(v -> {
-            String qrPayload = "Event: " + title +
-                    "\nDate: " + date +
-                    "\nTime: " + time +
-                    "\nLocation: " + location;
+            String qrPayload = "Event: " +
+                    ((TextView) view.findViewById(R.id.tvEventTitle)).getText() +
+                    "\nDate: " +
+                    ((TextView) view.findViewById(R.id.tvEventDate)).getText() +
+                    "\nTime: " +
+                    ((TextView) view.findViewById(R.id.tvEventTime)).getText() +
+                    "\nLocation: " +
+                    ((TextView) view.findViewById(R.id.tvEventLocation)).getText();
 
             Bundle bundle = new Bundle();
             bundle.putString("qrData", qrPayload);
@@ -121,13 +125,19 @@ public class EventDetailsFragment extends Fragment {
     }
 
     /**
-     * Adds the current user to the event’s waiting list in Firestore.
-     * A confirmation message appears after a successful join.
+     * Adds the current user to the waiting list for this event in Firestore.
+     * Updates UI after a successful join.
      *
      * @param v The view that triggered this action
      */
     private void addUserToWaitingList(View v) {
-        if (currentUser == null || eventId == null) {
+        if (currentUser == null) {
+            Snackbar.make(v, "Please log in first.", Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        if (eventId == null || eventId.isEmpty()) {
+            Log.e(TAG, "Missing eventId — cannot join waiting list");
+            Snackbar.make(v, "Error: Event not found.", Snackbar.LENGTH_LONG).show();
             return;
         }
 
@@ -136,17 +146,62 @@ public class EventDetailsFragment extends Fragment {
                 .collection("attendees")
                 .document(currentUser.getUid());
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("userId", currentUser.getUid());
-        data.put("email", currentUser.getEmail());
-        data.put("joinedAt", Timestamp.now());
-
-        attendeeRef.set(data)
+        attendeeRef.set(new AttendeeData(currentUser))
                 .addOnSuccessListener(aVoid -> {
                     joinBtn.setEnabled(false);
                     joinBtn.setText("Added ✅");
-                    Snackbar.make(v, "Joined waiting list!", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Joined waiting list.", Snackbar.LENGTH_SHORT).show();
                 })
-                .addOnFailureListener(e -> Log.e(TAG, "Error joining list", e));
+                .addOnFailureListener(e ->
+                        Log.e(TAG, "Error joining waiting list", e));
+    }
+
+    /**
+     * Checks if the current user has already joined this event’s waiting list.
+     * If so, disables the join button and updates the text.
+     */
+    private void checkIfAlreadyJoined() {
+        if (currentUser == null || eventId == null) return;
+
+        firestore.collection("eventAttendees")
+                .document(eventId)
+                .collection("attendees")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot.exists()) {
+                        joinBtn.setEnabled(false);
+                        joinBtn.setText("Added ✅");
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Log.e(TAG, "Error checking existing waiting list entry", e));
+    }
+
+    /**
+     * Inner class representing attendee data to be uploaded to Firestore.
+     */
+    private static class AttendeeData {
+        private final String userId;
+        private final String email;
+        private final Timestamp joinedAt;
+
+        public AttendeeData(FirebaseUser user) {
+            this.userId = user.getUid();
+            this.email = user.getEmail();
+            this.joinedAt = Timestamp.now();
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public Timestamp getJoinedAt() {
+            return joinedAt;
+        }
     }
 }
