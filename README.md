@@ -15,7 +15,7 @@ Tappit is an Android application built with **Firebase** and **Java**, designed 
 Instead of first-come-first-served signups, users join **lottery-based waiting lists** for popular community events.
 
 
-### Part 2 Preparation:
+## Project Part 2 Preparation:
 This section summarizes the required deliverables for **Project Part 2** and links to the detailed documentation in the Wiki.
 ---
 
@@ -56,4 +56,6 @@ Documents each class’s role, attributes, and relationships.
 
 ---
 
-
+## Project Part 3 - Half Way Checkpoint:
+This section summarizes the required deliverables for **Project Part 3** and our progress towards the final app.
+---
