@@ -44,7 +44,7 @@ Step-by-step diagrams showing:
 - Organizer flow for creating / managing events
 - Adim flow for viewing the activity  
 
-📸 **View here:** [UI Mockups and Storyboards →](../../wiki/UI-Mockups-and-Storyboard)
+📸 **View here:** [Storyboards Sequences →](../../wiki/UI-Mockups-and-Storyboard)
 
 ---
 
