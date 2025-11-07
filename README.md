@@ -62,5 +62,5 @@ This section summarizes the required deliverables for **Project Part 3** and our
 
 - [Storyboards]()
 - [UI Mockups]()
-- [UML Diagram]()
+- [UML Diagram](https://github.com/tappit301/TAPPIT301F25/wiki/UML-Diagrams)
 - [Product Backlog]()
