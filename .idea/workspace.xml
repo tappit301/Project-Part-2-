@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b51174e-4b87-4930-97a4-b5fc282762ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EventApp/app/src/main/java/com/example/eventapp/QrCodeFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EventApp/app/src/main/res/layout/fragment_qr_code.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventApp/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/EventApp/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventApp/app/src/main/java/com/example/eventapp/EventDetailsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/EventApp/app/src/main/java/com/example/eventapp/EventDetailsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventApp/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/EventApp/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventApp/app/src/main/res/layout/event_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/EventApp/app/src/main/res/layout/event_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventApp/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/EventApp/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,21 +27,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "VasuAggarwal007"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;VasuAggarwal007&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/tappit301/TAPPIT301F25.git",
-    "accountId": "d44177d4-0e4a-4252-9647-13488eda952f"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tappit301/TAPPIT301F25.git&quot;,
+    &quot;accountId&quot;: &quot;1fe1bfa4-ba12-4f83-a2aa-57f861cec896&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="34enxnUAl36ZKg0rCffbrT6PvPF" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -43,12 +51,14 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "Vasu",
+    "last_opened_file_path": "/Users/krishikakhosla/Desktop/CMPUT 301/projectpart3"
   }
 }]]></component>
   <component name="TaskManager">

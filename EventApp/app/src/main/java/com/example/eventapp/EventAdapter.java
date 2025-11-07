@@ -12,14 +12,36 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ *  THis is the adapter class that connects a list of {@link Event} objects
+ * to a RecyclerView so each event can be displayed in the UI.
+ *
+ * Each list item shows the event title and date/time,
+ * and lets the user tap to open full event details.</p>
+ *
+ * @author tappit
+ */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
+    /** List of events to display. */
     private final List<Event> eventList;
 
+    /**
+     * Constructs the adapter with a given list of events.
+     *
+     * @param eventList list of {@link Event} objects to show
+     */
     public EventAdapter(List<Event> eventList) {
         this.eventList = eventList;
     }
 
+    /**
+     * Inflates the layout for each event item when a new ViewHolder is created.
+     *
+     * @param parent   parent ViewGroup where the new view will be added
+     * @param viewType type of view (unused here)
+     * @return a new {@link EventViewHolder} for the list item
+     */
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,6 +50,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new EventViewHolder(view);
     }
 
+    /**
+     * Binds event data (title and date/time) to the list item and
+     * handles the click action to navigate to the Event Details screen.
+     *
+     * @param holder   the {@link EventViewHolder} that holds the views
+     * @param position the index of the current event in the list
+     */
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = eventList.get(position);
@@ -35,10 +64,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.tvTitle.setText(event.getTitle());
         holder.tvDate.setText(event.getDate() + " • " + event.getTime());
 
-        //Click listener → open Event Details screen with eventId
         holder.itemView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("eventId", event.getId());         // Firestore document ID
+            bundle.putString("eventId", event.getId());
             bundle.putString("title", event.getTitle());
             bundle.putString("desc", event.getDescription());
             bundle.putString("date", event.getDate());
@@ -46,7 +74,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             bundle.putString("location", event.getLocation());
 
             try {
-                //Navigate to EventDetailsFragment
                 Navigation.findNavController(v).navigate(
                         R.id.action_organizerLandingFragment_to_eventDetailsFragment,
                         bundle
@@ -57,14 +84,31 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         });
     }
 
+    /**
+     * @return the number of events in the list
+     */
     @Override
     public int getItemCount() {
         return eventList != null ? eventList.size() : 0;
     }
 
+    /**
+     * ViewHolder that stores references to the views inside each
+     * event list item for quick access during scrolling.
+     */
     static class EventViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle, tvDate;
 
+        /** TextView that shows the event title. */
+        TextView tvTitle;
+
+        /** TextView that shows the event date and time. */
+        TextView tvDate;
+
+        /**
+         * Creates a new ViewHolder for one event list item.
+         *
+         * @param itemView the inflated layout for the item
+         */
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvEventTitle);
